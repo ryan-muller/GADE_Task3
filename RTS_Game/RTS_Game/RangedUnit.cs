@@ -61,6 +61,24 @@ namespace RTS_Game
             }
         }
 
+        public override void Attack(Building b)
+        {
+            string buldingType = b.GetType().ToString();
+            string[] arr = buldingType.Split('.');
+            buldingType = arr[arr.Length - 1];
+
+            if (buldingType == "FactoryBuilding")
+            {
+                FactoryBuilding temp = (FactoryBuilding)b;
+                temp.Hp = temp.Hp - this.Atk;
+            }
+            else
+            {
+                ResourceBuilding temp = (ResourceBuilding)b;
+                temp.Hp = temp.Hp - this.Atk;
+            }
+        }
+
         public override bool CheckRange(Unit u)
         {
             string unitType = u.GetType().ToString();
@@ -93,9 +111,41 @@ namespace RTS_Game
             }
         }
 
+        public override bool CheckRange(Building b)
+        {
+            string buldingType = b.GetType().ToString();
+            string[] arr = buldingType.Split('.');
+            buldingType = arr[arr.Length - 1];
+
+            if (buldingType == "FactoryBuilding")
+            {
+                FactoryBuilding temp = (FactoryBuilding)b;
+                if (Math.Abs(this.XPos - temp.Xpos) <= this.atkRange && Math.Abs(this.YPos - temp.Ypos) <= this.atkRange)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                ResourceBuilding temp = (ResourceBuilding)b;
+                if (Math.Abs(this.XPos - temp.Xpos) <= this.atkRange && Math.Abs(this.YPos - temp.Ypos) <= this.atkRange)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         public override int ClosestUnit(Unit[] u)
         {
-            int distX = 20, distY = 20;
+            int distX = 1000, distY = 1000;
             int count = 0;
             int targetId = 0;
             while (count < u.Length)
@@ -121,6 +171,42 @@ namespace RTS_Game
                     {
                         distX = (this.XPos - temp.XPos);
                         distY = (this.YPos - temp.YPos);
+                        targetId = count;
+                    }
+                }
+                count++;
+            }
+            return targetId;
+        }
+
+        public override int ClosestBuilding(Building[] b)
+        {
+            int distX = 1000, distY = 1000;
+            int count = 0;
+            int targetId = 0;
+            while (count < b.Length)
+            {
+                string buldingType = b[count].GetType().ToString();
+                string[] arr = buldingType.Split('.');
+                buldingType = arr[arr.Length - 1];
+
+                if (buldingType == "FactoryBuilding")
+                {
+                    FactoryBuilding temp = (FactoryBuilding)b[count];
+                    if ((this.XPos - temp.Xpos) < distX && (this.YPos - temp.Ypos) < distY && (this.XPos - temp.Xpos) > 0 && (this.YPos - temp.Ypos) > 0)
+                    {
+                        distX = (this.XPos - temp.Xpos);
+                        distY = (this.YPos - temp.Ypos);
+                        targetId = count;
+                    }
+                }
+                else
+                {
+                    ResourceBuilding temp = (ResourceBuilding)b[count];
+                    if ((this.XPos - temp.Xpos) < distX && (this.YPos - temp.Ypos) < distY && (this.XPos - temp.Xpos) > 0 && (this.YPos - temp.Ypos) > 0)
+                    {
+                        distX = (this.XPos - temp.Xpos);
+                        distY = (this.YPos - temp.Ypos);
                         targetId = count;
                     }
                 }
@@ -170,14 +256,85 @@ namespace RTS_Game
                     MeleeUnit temp = (MeleeUnit)u;
                     targetX = temp.XPos;
                     targetY = temp.YPos;
-
                 }
                 else
                 {
                     RangedUnit temp = (RangedUnit)u;
                     targetX = temp.XPos;
                     targetY = temp.YPos;
+                }
 
+                if ((this.XPos - targetX) < (this.YPos - targetY))
+                {
+                    if (this.XPos - targetX < 0)
+                    {
+                        this.XPos++;
+                        return 2;
+                    }
+                    else
+                    {
+                        this.XPos--;
+                        return 4;
+                    }
+                }
+                else
+                {
+                    if (this.YPos - targetY < 0)
+                    {
+                        this.YPos++;
+                        return 3;
+                    }
+                    else
+                    {
+                        this.YPos--;
+                        return 1;
+                    }
+                }
+            }
+        }
+
+        public override int MoveUnit(Building b)
+        {
+            int runMark = this.Hp * (25 / 100);
+            if (this.Hp < runMark)
+            {
+                Random random = new Random();
+                int direction = random.Next(1, 5);
+                switch (direction)
+                {
+                    case 1:
+                        this.YPos--;
+                        break;
+                    case 2:
+                        this.XPos++;
+                        break;
+                    case 3:
+                        this.YPos++;
+                        break;
+                    case 4:
+                        this.XPos--;
+                        break;
+                }
+                return direction;
+            }
+            else
+            {
+                int targetX, targetY;
+                string buldingType = b.GetType().ToString();
+                string[] arr = buldingType.Split('.');
+                buldingType = arr[arr.Length - 1];
+
+                if (buldingType == "FactoryBuilding")
+                {
+                    FactoryBuilding temp = (FactoryBuilding)b;
+                    targetX = temp.Xpos;
+                    targetY = temp.Ypos;
+                }
+                else
+                {
+                    ResourceBuilding temp = (ResourceBuilding)b;
+                    targetX = temp.Xpos;
+                    targetY = temp.Ypos;
                 }
 
                 if ((this.XPos - targetX) < (this.YPos - targetY))

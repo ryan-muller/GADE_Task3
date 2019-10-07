@@ -31,11 +31,19 @@ namespace RTS_Game
 
         public abstract int MoveUnit(Unit u);
 
+        public abstract int MoveUnit(Building b);
+
         public abstract void Attack(Unit u);
+
+        public abstract void Attack(Building b);
 
         public abstract bool CheckRange(Unit u);
 
+        public abstract bool CheckRange(Building b);
+
         public abstract int ClosestUnit(Unit[] u);
+
+        public abstract int ClosestBuilding(Building[] b);
 
         public abstract void Death();
 

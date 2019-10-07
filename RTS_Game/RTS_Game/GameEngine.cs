@@ -19,6 +19,7 @@ namespace RTS_Game
             mapData = new Map(numUnits, numBuildings);
             this.mapData.GenerateBattlefield();
             units = this.mapData.Units;
+            buildings = this.mapData.Buildings;
         }
 
         public int RoundCount { get => roundCount;}
@@ -64,9 +65,10 @@ namespace RTS_Game
 
             for (int k = 0; k < units.Length; k++)
             {
+                int targetId;
                 if ((hpTeam0>0 && hpTeam1>0))
                 {
-                    int targetId;
+                    
                     int runMark;
 
                     string unitType = units[k].GetType().ToString();
@@ -79,8 +81,7 @@ namespace RTS_Game
                         targetId = temp.ClosestUnit(units);
                         runMark = temp.Hp * (25 / 100);
                         if (temp.Hp < runMark)
-                        {
-                            
+                        {                          
                             mapData.updatePosition(temp, temp.MoveUnit(units[targetId]));
                         }
                         else if (temp.Attacking == false && temp.CheckRange(units[targetId])==false)
@@ -113,9 +114,44 @@ namespace RTS_Game
                         }
                     }
                 }
+                else
+                {
+                    string unitType = units[k].GetType().ToString();
+                    string[] arr = unitType.Split('.');
+                    unitType = arr[arr.Length - 1];
+
+                    if (unitType == "MeleeUnit")
+                    {
+                        MeleeUnit tempUnit = (MeleeUnit)units[k];
+                        targetId = tempUnit.ClosestBuilding(buildings);
+                        if (tempUnit.Attacking == false && tempUnit.CheckRange(buildings[targetId]) == false)
+                        {
+                            mapData.updatePosition(tempUnit, tempUnit.MoveUnit(buildings[targetId]));
+                        }
+                        else if (tempUnit.CheckRange(buildings[targetId]))
+                        {
+                            tempUnit.Attacking = true;
+                            tempUnit.Attack(buildings[targetId]);
+                        }                        
+                    }
+                    else
+                    {
+                        RangedUnit tempUnit = (RangedUnit)units[k];
+                        targetId = tempUnit.ClosestBuilding(buildings);
+                        if (tempUnit.Attacking == false && tempUnit.CheckRange(buildings[targetId]) == false)
+                        {
+                            mapData.updatePosition(tempUnit, tempUnit.MoveUnit(buildings[targetId]));
+                        }
+                        else if (tempUnit.CheckRange(buildings[targetId]))
+                        {
+                            tempUnit.Attacking = true;
+                            tempUnit.Attack(buildings[targetId]);
+                        }
+                    }               
+                }
                 
             }
-            buildings = this.mapData.Buildings;
+            
 
             for (int p = 0; p < buildings.Length; p++)
             {

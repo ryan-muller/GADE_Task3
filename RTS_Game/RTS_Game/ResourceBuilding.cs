@@ -26,10 +26,18 @@ namespace RTS_Game
 
         public ResourceBuilding(int xpos, int ypos, int hp, int team, char symbol) : base(xpos, ypos, hp, team, symbol)
         {
+            this.type = "Gems";
+            this.remainingPool = 100;
+            this.generated = 0;
+            this.genPerRound = 2;
         }
 
         public ResourceBuilding(int xpos, int ypos, int hp,int maxHp, int team, char symbol,string resourceType,int generated,int genPerRound,int remainingPool) : base(xpos, ypos, hp, team, symbol)
         {
+            this.type = resourceType;
+            this.remainingPool = remainingPool;
+            this.generated = generated;
+            this.genPerRound = genPerRound;
         }
 
         public override void Death()
@@ -39,7 +47,7 @@ namespace RTS_Game
 
         public override string ToString()
         {
-            return ">Resource Building<" + "\nSymbol: " + this.Symbol + "\nX-Pos: " + this.Xpos + "\nY-Pos: " + this.Ypos + "\nTeam: " + this.Team + "\nMax HP:" + this.MaxHp + "\nCurrent HP: " + this.Hp + "\nResource Type: " + this.type + "\nResources Generated " + this.generated + "\nResources Per Round" + this.genPerRound + "\nResource Pool " + this.remainingPool + "\n";
+            return "\n>Resource Building<" + "\nSymbol: " + this.Symbol + "\nX-Pos: " + this.Xpos + "\nY-Pos: " + this.Ypos + "\nTeam: " + this.Team + "\nMax HP:" + this.MaxHp + "\nCurrent HP: " + this.Hp + "\nResource Type: " + this.type + "\nResources Generated " + this.generated + "\nResources Per Round" + this.genPerRound + "\nResource Pool " + this.remainingPool + "\n";
         }
 
         public void GenerateResources()

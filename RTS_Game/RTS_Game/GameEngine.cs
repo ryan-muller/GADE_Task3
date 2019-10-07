@@ -10,6 +10,7 @@ namespace RTS_Game
     {
         const int NUM_UNITS = 8;
         int roundCount = 0;
+        int team1Gems=0, team2Gems=0;
         Unit[] units;
         Building[] buildings;
         Map mapData;
@@ -23,6 +24,8 @@ namespace RTS_Game
         }
 
         public int RoundCount { get => roundCount;}
+        public int Team1Gems { get => team1Gems;}
+        public int Team2Gems { get => team2Gems;}
         internal Map MapData { get => mapData; }
 
         
@@ -162,18 +165,42 @@ namespace RTS_Game
                 if (buldingType == "FactoryBuilding")
                 {
                     FactoryBuilding temp = (FactoryBuilding)buildings[p];
-                    if ( roundCount%temp.ProductionSpeed == 0 && roundCount != 0)
+                    if (temp.Team == 0)
                     {
-                        Array.Resize( ref units,units.Length + 1);
-                        
-                        units[units.Length - 1] = temp.SpawnUnit();
-                        mapData.updatePosition(units[units.Length - 1], 5);
+                        if (team1Gems >= 5)
+                        {
+                            Array.Resize(ref units, units.Length + 1);
+
+                            units[units.Length - 1] = temp.SpawnUnit();
+                            mapData.updatePosition(units[units.Length - 1], 5);
+                            team1Gems -= 5;
+                        }
+                    }
+                    else
+                    {
+                        if (team2Gems >= 5)
+                        {
+                            Array.Resize(ref units, units.Length + 1);
+
+                            units[units.Length - 1] = temp.SpawnUnit();
+                            mapData.updatePosition(units[units.Length - 1], 5);
+                            team2Gems -= 5;
+                        }
                     }
                 }
                 else
                 {
                     ResourceBuilding temp = (ResourceBuilding)buildings[p];
                     temp.GenerateResources();
+                    if (temp.Team == 0)
+                    {
+                        team1Gems += temp.GenPerRound;
+                    }
+                    else
+                    {
+                        team2Gems += temp.GenPerRound;
+                    }
+                    
                 }
             }
             roundCount++;

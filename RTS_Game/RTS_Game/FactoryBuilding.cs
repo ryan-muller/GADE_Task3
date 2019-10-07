@@ -43,7 +43,7 @@ namespace RTS_Game
 
         public override string ToString()
         {
-            return ">Factory Building<" + "\nSymbol: " + this.Symbol + "\nX-Pos: " + this.Xpos + "\nY-Pos: " + this.Ypos + "\nTeam: " + this.Team + "\nMax HP:" + this.MaxHp + "\nCurrent HP: " + this.Hp + "\nUnit Type Created: " + this.unitType + "\nProduction Speed " + this.productionSpeed;
+            return "\n>Factory Building<" + "\nSymbol: " + this.Symbol + "\nX-Pos: " + this.Xpos + "\nY-Pos: " + this.Ypos + "\nTeam: " + this.Team + "\nMax HP:" + this.MaxHp + "\nCurrent HP: " + this.Hp + "\nUnit Type Created: " + this.unitType + "\nProduction Speed " + this.productionSpeed;
         }
 
         public Unit SpawnUnit()

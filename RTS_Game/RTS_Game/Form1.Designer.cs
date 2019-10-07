@@ -37,6 +37,8 @@
             this.timerGame = new System.Windows.Forms.Timer(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
+            this.lblResourcesTeam1 = new System.Windows.Forms.Label();
+            this.lblResourcesTeam2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblMap
@@ -61,7 +63,7 @@
             // 
             // btnStartGame
             // 
-            this.btnStartGame.Location = new System.Drawing.Point(409, 360);
+            this.btnStartGame.Location = new System.Drawing.Point(409, 433);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(75, 23);
             this.btnStartGame.TabIndex = 2;
@@ -71,7 +73,7 @@
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(516, 360);
+            this.btnPause.Location = new System.Drawing.Point(516, 433);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(75, 23);
             this.btnPause.TabIndex = 3;
@@ -81,7 +83,7 @@
             // 
             // rtbUnitInfo
             // 
-            this.rtbUnitInfo.Location = new System.Drawing.Point(405, 44);
+            this.rtbUnitInfo.Location = new System.Drawing.Point(405, 117);
             this.rtbUnitInfo.Name = "rtbUnitInfo";
             this.rtbUnitInfo.Size = new System.Drawing.Size(186, 291);
             this.rtbUnitInfo.TabIndex = 4;
@@ -94,7 +96,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(409, 390);
+            this.btnSave.Location = new System.Drawing.Point(409, 463);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 5;
@@ -104,7 +106,7 @@
             // 
             // btnRead
             // 
-            this.btnRead.Location = new System.Drawing.Point(516, 390);
+            this.btnRead.Location = new System.Drawing.Point(516, 463);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(75, 23);
             this.btnRead.TabIndex = 6;
@@ -112,11 +114,31 @@
             this.btnRead.UseVisualStyleBackColor = true;
             this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
+            // lblResourcesTeam1
+            // 
+            this.lblResourcesTeam1.AutoSize = true;
+            this.lblResourcesTeam1.Location = new System.Drawing.Point(405, 56);
+            this.lblResourcesTeam1.Name = "lblResourcesTeam1";
+            this.lblResourcesTeam1.Size = new System.Drawing.Size(79, 13);
+            this.lblResourcesTeam1.TabIndex = 7;
+            this.lblResourcesTeam1.Text = "Team 1 Gems: ";
+            // 
+            // lblResourcesTeam2
+            // 
+            this.lblResourcesTeam2.AutoSize = true;
+            this.lblResourcesTeam2.Location = new System.Drawing.Point(405, 73);
+            this.lblResourcesTeam2.Name = "lblResourcesTeam2";
+            this.lblResourcesTeam2.Size = new System.Drawing.Size(79, 13);
+            this.lblResourcesTeam2.TabIndex = 8;
+            this.lblResourcesTeam2.Text = "Team 2 Gems: ";
+            // 
             // frmGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 457);
+            this.ClientSize = new System.Drawing.Size(714, 537);
+            this.Controls.Add(this.lblResourcesTeam2);
+            this.Controls.Add(this.lblResourcesTeam1);
             this.Controls.Add(this.btnRead);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.rtbUnitInfo);
@@ -142,6 +164,8 @@
         private System.Windows.Forms.Timer timerGame;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnRead;
+        private System.Windows.Forms.Label lblResourcesTeam1;
+        private System.Windows.Forms.Label lblResourcesTeam2;
     }
 }
 

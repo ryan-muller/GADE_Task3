@@ -40,6 +40,8 @@ namespace RTS_Game
         {
             game.GameBrain();
             lblRoundCount.Text = "Round: " + Convert.ToString(game.RoundCount);
+            lblResourcesTeam1.Text = "Team 1 Gems: " + Convert.ToString(game.Team1Gems);
+            lblResourcesTeam2.Text = "Team 2 Gems: " + Convert.ToString(game.Team2Gems);
             lblMap.Text = game.MapData.PopulateMap();
             rtbUnitInfo.Text = "";
             for (int i = 0; i < game.MapData.Units.Length; i++)

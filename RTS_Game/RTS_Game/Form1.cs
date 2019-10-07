@@ -13,6 +13,7 @@ namespace RTS_Game
 {
     public partial class frmGameWindow : Form
     {
+        
         GameEngine game = new GameEngine(8, 4);
         public frmGameWindow()
         {

@@ -43,10 +43,10 @@
             // 
             this.lblMap.AutoSize = true;
             this.lblMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMap.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMap.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMap.Location = new System.Drawing.Point(13, 13);
             this.lblMap.Name = "lblMap";
-            this.lblMap.Size = new System.Drawing.Size(78, 21);
+            this.lblMap.Size = new System.Drawing.Size(100, 20);
             this.lblMap.TabIndex = 0;
             this.lblMap.Text = "temp text";
             // 

@@ -9,6 +9,8 @@ namespace RTS_Game
 {
     class Map
     {
+        private const int mAX_WIDTH = 30;
+        private const int mAX_HEIGHT = 30;
         char[,] arrMap;
         int unitCount;
         int buildingCount;
@@ -25,9 +27,13 @@ namespace RTS_Game
         public Unit[] Units { get => units; set => units = value; }
         public Building[]  Buildings { get => buildings; set => buildings = value; }
 
+        public static int MAX_HEIGHT => mAX_HEIGHT;
+
+        public static int MAX_WIDTH => mAX_WIDTH;
+
         public void GenerateBattlefield()
         {
-            arrMap = new char[20,20];
+            arrMap = new char[MAX_HEIGHT,MAX_WIDTH];
 
             Random rand = new Random();
             
@@ -35,8 +41,8 @@ namespace RTS_Game
             {
                 int type = rand.Next(0, 2);
                 int team = rand.Next(0, 2);
-                int xPos = rand.Next(0, 20);
-                int yPos = rand.Next(0, 20);
+                int xPos = rand.Next(0, MAX_WIDTH);
+                int yPos = rand.Next(0, MAX_HEIGHT);
                 
                 switch (type)
                 {
@@ -55,8 +61,8 @@ namespace RTS_Game
                                         MeleeUnit temp = (MeleeUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -65,8 +71,8 @@ namespace RTS_Game
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }                                   
@@ -85,8 +91,8 @@ namespace RTS_Game
                                         MeleeUnit temp = (MeleeUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -95,8 +101,8 @@ namespace RTS_Game
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -120,8 +126,8 @@ namespace RTS_Game
                                         MeleeUnit temp = (MeleeUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -130,8 +136,8 @@ namespace RTS_Game
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -150,8 +156,8 @@ namespace RTS_Game
                                         MeleeUnit temp = (MeleeUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -160,8 +166,8 @@ namespace RTS_Game
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             j = 0;
                                         }
                                     }
@@ -173,9 +179,9 @@ namespace RTS_Game
                 }
                 
             }
-            for (int y = 0; y < 20; y++)
+            for (int y = 0; y < MAX_HEIGHT; y++)
             {
-                for (int x = 0; x < 20; x++)
+                for (int x = 0; x < MAX_WIDTH; x++)
                 {
                     arrMap[y, x] = '.';
                 }
@@ -202,8 +208,8 @@ namespace RTS_Game
             {
                 int team = rand.Next(0, 2);
                 int type = rand.Next(0, 2);
-                int xPos = rand.Next(0, 20);
-                int yPos = rand.Next(0, 20);
+                int xPos = rand.Next(0, MAX_WIDTH);
+                int yPos = rand.Next(0, MAX_HEIGHT);
 
                 switch (type)
                 {
@@ -231,8 +237,8 @@ namespace RTS_Game
                                         FactoryBuilding temp = (FactoryBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -241,8 +247,8 @@ namespace RTS_Game
                                         ResourceBuilding temp = (ResourceBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -261,8 +267,8 @@ namespace RTS_Game
                                         FactoryBuilding temp = (FactoryBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -271,8 +277,8 @@ namespace RTS_Game
                                         ResourceBuilding temp = (ResourceBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -296,8 +302,8 @@ namespace RTS_Game
                                         FactoryBuilding temp = (FactoryBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -306,8 +312,8 @@ namespace RTS_Game
                                         ResourceBuilding temp = (ResourceBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -326,8 +332,8 @@ namespace RTS_Game
                                         FactoryBuilding temp = (FactoryBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -336,8 +342,8 @@ namespace RTS_Game
                                         ResourceBuilding temp = (ResourceBuilding)buildings[p];
                                         while (xPos == temp.Xpos && yPos == temp.Ypos)
                                         {
-                                            xPos = rand.Next(0, 20);
-                                            yPos = rand.Next(0, 20);
+                                            xPos = rand.Next(0, MAX_WIDTH);
+                                            yPos = rand.Next(0, MAX_HEIGHT);
                                             p = 0;
                                         }
                                     }
@@ -369,9 +375,9 @@ namespace RTS_Game
         public string PopulateMap()
         {
             string output="";
-            for (int y = 0; y < 20; y++)
+            for (int y = 0; y < MAX_HEIGHT; y++)
             {
-                for (int x = 0; x < 20; x++)
+                for (int x = 0; x < MAX_WIDTH; x++)
                 {
                     output = output + arrMap[y, x];
                 }
@@ -441,9 +447,9 @@ namespace RTS_Game
         }
         public void Read()
         {
-            for (int y = 0; y < 20; y++)
+            for (int y = 0; y < MAX_HEIGHT; y++)
             {
-                for (int x = 0; x < 20; x++)
+                for (int x = 0; x < MAX_WIDTH; x++)
                 {
                     arrMap[y, x] = '.';
                 }

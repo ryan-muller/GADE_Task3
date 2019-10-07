@@ -39,7 +39,7 @@ namespace RTS_Game
             
             for (int i = 0; i < units.Length; i++)
             {
-                int type = rand.Next(0, 2);
+                int type = rand.Next(0, 3);
                 int team = rand.Next(0, 2);
                 int xPos = rand.Next(0, MAX_WIDTH);
                 int yPos = rand.Next(0, MAX_HEIGHT);
@@ -66,7 +66,7 @@ namespace RTS_Game
                                             j = 0;
                                         }
                                     }
-                                    else
+                                    else if (unitType == "RangedUnit")
                                     {
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
@@ -96,7 +96,7 @@ namespace RTS_Game
                                             j = 0;
                                         }
                                     }
-                                    else
+                                    else if (unitType == "RangedUnit")
                                     {
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
@@ -131,7 +131,7 @@ namespace RTS_Game
                                             j = 0;
                                         }
                                     }
-                                    else
+                                    else if (unitType == "RangedUnit")
                                     {
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
@@ -161,7 +161,7 @@ namespace RTS_Game
                                             j = 0;
                                         }
                                     }
-                                    else
+                                    else if (unitType == "RangedUnit")
                                     {
                                         RangedUnit temp = (RangedUnit)units[j];
                                         while (xPos == temp.XPos && yPos == temp.YPos)
@@ -175,6 +175,47 @@ namespace RTS_Game
                                 units[i] = new RangedUnit("Slinger",xPos, yPos, 15, 1, 2, 4, 1, 'r', false);
                                 break;
                         }
+                        break;
+                    case 2:
+                        for (int j = 0; j < i; j++)
+                        {
+                            string unitType = units[j].GetType().ToString();
+                            string[] arr = unitType.Split('.');
+                            unitType = arr[arr.Length - 1];
+
+                            if (unitType == "MeleeUnit")
+                            {
+                                MeleeUnit temp = (MeleeUnit)units[j];
+                                while (xPos == temp.XPos && yPos == temp.YPos)
+                                {
+                                    xPos = rand.Next(0, MAX_WIDTH);
+                                    yPos = rand.Next(0, MAX_HEIGHT);
+                                    j = 0;
+                                }
+                            }
+                            else if (unitType == "RangedUnit")
+                            {
+                                RangedUnit temp = (RangedUnit)units[j];
+                                while (xPos == temp.XPos && yPos == temp.YPos)
+                                {
+                                    xPos = rand.Next(0, MAX_WIDTH);
+                                    yPos = rand.Next(0, MAX_HEIGHT);
+                                    j = 0;
+                                }
+                            }
+                            else
+                            {
+                                WizardUnit temp = (WizardUnit)units[j];
+                                while (xPos == temp.XPos && yPos == temp.YPos)
+                                {
+                                    xPos = rand.Next(0, MAX_WIDTH);
+                                    yPos = rand.Next(0, MAX_HEIGHT);
+                                    j = 0;
+                                }
+
+                            }
+                        }
+                        units[i] = new WizardUnit("Wizard", xPos, yPos, 20, 2, 4, 2, 2, 'W', false);
                         break;
                 }
                 
@@ -197,7 +238,7 @@ namespace RTS_Game
                     MeleeUnit temp = (MeleeUnit)units[i];
                     arrMap[temp.YPos, temp.XPos] = temp.Symbol;
                 }
-                else
+                else if (unitType == "RangedUnit")
                 {
                     RangedUnit temp = (RangedUnit)units[i];
                     arrMap[temp.YPos, temp.XPos] = temp.Symbol;
@@ -418,7 +459,7 @@ namespace RTS_Game
                         break;
                 }                   
             }
-            else
+            else if (unitType == "RangedUnit")
             {
                 RangedUnit temp = (RangedUnit)u;
                 switch (direction)
